@@ -1,1 +1,2 @@
-# VisFocus
+# VisFocus Project
+Project page
