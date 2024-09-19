@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="VisFocus">
+    <meta name="keywords" content="VisFocus, ECCV 2024, Computer Vision, Focus Visualization">
+    <title>VisFocus: ECCV 2024</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="header">
+        <div class="header-content">
+            <img src="imgs/logos/runi.png" alt="Reichman University" class="logo">
+            <div> 
+                <h1>VisFocus:<br>
+                    Prompt-Guided Vision Encoders for OCR-Free Dense Document Understanding
+                </h1>
+                <p class="acceptance-text">ECCV 2024</p>
+                <p class="authors-text"><sup>1</sup>Ofir Abramovich, <sup>2</sup>Niv Nayman, <sup>2</sup>Sharon Fogel, <sup>2</sup>Inbal Lavi, <sup>2</sup>Ron Litman,<br>
+                    <sup>2</sup>Shahar Tsiper, <sup>2</sup>Royee Tichauer, <sup>2</sup>Srikar Appalaraju, <sup>2</sup>Shai Mazor, <sup>2</sup>R. Manmatha</p>
+                    <p class="institute-text"><sup>1</sup>Reichman University, <sup>2</sup>Amazon AWS AI Labs</p>
+    
+                    <div class="button-container">
+                        <a href="https://arxiv.org/abs/2407.12594" target="_blank">
+                            <img src="imgs/buttons/arxiv.png" alt="arXiv" class="button-image">
+                        </a>
+                        <a href="https://arxiv.org/pdf/2407.12594" download>
+                            <img src="imgs/buttons/paper.png" alt="PDF" class="button-image">
+                        </a>
+                        <a href="" target="_blank">
+                            <img src="imgs/buttons/code.png" alt="Code" class="button-image">
+                        </a>
+                        <a href="https://huggingface.co/papers/2407.12594" target="_blank">
+                            <img src="imgs/buttons/hf_pp.png" alt="Poster" class="button-image">
+                        </a>
+                    </div>
+                </div>
+            <img src="imgs/logos/aws_black.png" alt="Amazon AWS AI Labs" class="logo">
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="section overview">
+            <h2>Overview</h2>
+            <p>VisFocus is an OCR-free method for dense document understanding that aims to better utilize the vision encoder's capacity by directly coupling it with language prompts. This is achieved using a combination of architectural enhancements and a novel pre-training task.</p>
+            <figure>
+                <img src="imgs/teaser.png" alt="Overview figure">
+                <figcaption>Method Overview.</figcaption>
+            </figure>
+                    
+        </section>
+
+        <section class="section abstract">
+            <h2>Abstract</h2>
+            <p>In recent years, notable advancements have been made in the domain of visual document understanding,
+                with the prevailing architecture comprising a cascade of vision and language models.
+                The text component can either be extracted explicitly with the use of external OCR models in OCR-based approaches,
+                or alternatively, the vision model can be endowed with reading capabilities in OCR-free approaches. Typically,
+                the queries to the model are input exclusively to the language component, necessitating the visual features to encompass the entire document.
+                In this paper, we present VisFocus, an OCR-free method designed to better exploit the vision encoder's capacity
+                by coupling it directly with the language prompt. To do so, we replace the down-sampling layers with layers that receive
+                the input prompt and allow highlighting relevant parts of the document, while disregarding others.
+                We pair the architecture enhancements with a novel pre-training task, using language masking on a snippet of the document
+                text fed to the visual encoder in place of the prompt, to empower the model with focusing capabilities. Consequently,
+                VisFocus learns to allocate its attention to text patches pertinent to the provided prompt. Our experiments demonstrate that
+                this prompt-guided visual encoding approach significantly improves performance, achieving state-of-the-art results on various benchmarks.</p>
+        </section>
+
+        <section class="section method">
+            <h2>Method</h2>
+            <p>VisFucos proposes two main contribustions:</p>
+            <div class="method-container">
+                <div class="method-column">
+                    <h3>Localized Masked Language Modeling (LMPM)</h3>
+                    <p>
+                        LMPM aims to guide the model's attention towards relevant sections of a document by:
+                        <div style="text-align: center;">
+                        Smapling a text snippet from the pre-extracted text of the document <br>
+                        ↓ <br>
+                        Randomly masking portions of the text snippet <br>
+                        ↓ <br>
+                        Feeding the masked text snippet to the vision encoder <br>
+                        ↓ <br>
+                        Training the model to predict the masked tokens
+                        </div>
+                    </p>
+                    <figure>
+                        <img src="imgs/lmpm.png" alt="LMPM">
+                        <figcaption>Figure 1: Overview of the VisFocus method.</figcaption>
+                    </figure>
+
+                </div>
+                <div class="method-column">
+                    <h3>Vision-Language Patch-Merging (ViLMA)</h3>
+                    <p>
+                        ViLMA layers enable direct interaction between the visual features and the language prompt. <br>
+                        They replace traditional down-sampling layers in the vision encoder, allowing the model to highlight relevant parts of the document based on the input prompt while disregarding less important areas.<br>
+                        <!-- We show that applying ViLMA, along with LMPM pre-preatining, significantly improve the model's performance on various benchmarks. -->
+                    </p>
+                    <figure>
+                        <img src="imgs/vilma.png" alt="ViLMA">
+                        <figcaption>Figure 1: Overview of the VisFocus method.</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section results">
+            <h2>Results</h2>
+            <p>Comparison with previous OCR-Free methods on VQA benchmarks.</p>
+            <figure>
+                <img src="imgs/main_results.png" alt="main_results" style="max-width: 75%;">
+                <figcaption>VisFocus outperforms previous methods of comparable scale, even when trained on substantially less pre-training data. We report ANLS on DocVQA and InfoVQA, Relaxed Accuracy (RA) on ChartQA and Exact Match (EM) on OCR-VQA and AI2D. In fully-trained methods, we only state total number of parameters.</figcaption>
+            </figure>
+        </section>
+
+        <section class="section ablations">
+            <h2>Results</h2>
+            <p>We perform an extesive ablation study on each of VisFocus' components. More ablation can be fround in the paper.</p>
+            <figure>
+                <img src="imgs/abl_table.png" alt="ablation_table" style="max-width: 75%;">
+                <figcaption>Breaking down the contributions of VisFocus’ main components.</figcaption>
+            </figure>
+            <br>
+            <figure>
+                <img src="imgs/abl_maps.png" alt="ablation_lmpm" style="max-width: 75%;">
+                <figcaption>Attention maps of the last ViLMA layer, with and without LMPM.</figcaption>
+            </figure>
+            <br>
+        </section>
+
+        <section class="section video">
+            <h2>Video</h2>
+            <iframe src="https://www.youtube.com/embed/yourvideoid" frameborder="0" allowfullscreen></iframe>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 VisFocus | Contact us at <a href="mailto:yourname@example.com">yourname@example.com</a></p>
+    </footer>
+
+</body>
+</html>
