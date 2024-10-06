@@ -73,10 +73,10 @@ body {
     border-radius: 8px;
     margin-bottom: 20px;
 }
-.video iframe {
-    width: 100%;
-    height: 500px;
-    margin-bottom: 20px;
+.video-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
 }
 footer {
     text-align: center;
@@ -163,4 +163,39 @@ figure figcaption {
     margin-bottom: 0px;
     text-align: center;
     font-weight: bold;
+}
+
+/* Collapsible content */
+.collapsible-content {
+    display: none; /* Hidden by default */
+}
+
+/* Style for the collapse button */
+.collapse-button {
+    background-color: white;
+    color: gray;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.collapse-button:focus {
+    outline: none;
+}
+
+/* Optional style when content is visible */
+.collapsible-content.visible {
+    display: block;
+}
+
+/* Button arrow for collapsed state */
+.collapsible-content:not(.visible) + .collapse-button::after {
+    content: "▼"; /* Down arrow */
+}
+
+/* Button arrow for visible state */
+.collapsible-content.visible + .collapse-button::after {
+    content: "▲"; /* Up arrow */
 }

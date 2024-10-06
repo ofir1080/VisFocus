@@ -1,5 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+    
+<script>
+    function toggleCollapse(contentId) {
+        const content = document.getElementById(contentId);
+        const button = document.querySelector(`button[onclick="toggleCollapse('${contentId}')"]`);
+    
+        if (content.style.display === "none" || content.style.display === "") {
+            content.style.display = "block";
+            button.textContent = "▲"; // Change button to up arrow
+        } else {
+            content.style.display = "none";
+            button.textContent = "▼"; // Change button to down arrow
+        }
+    }
+    </script>
+        
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +28,7 @@
 
     <div class="header">
         <div class="header-content">
-            <img src="imgs/logos/runi.png" alt="Reichman University" class="logo">
+            <img src="imgs/logos/runi_2.png" alt="Reichman University" class="logo">
             <div> 
                 <h1>VisFocus:<br>
                     Prompt-Guided Vision Encoders for OCR-Free Dense Document Understanding
@@ -20,7 +36,7 @@
                 <p class="acceptance-text">ECCV 2024</p>
                 <p class="authors-text"><sup>1</sup>Ofir Abramovich, <sup>2</sup>Niv Nayman, <sup>2</sup>Sharon Fogel, <sup>2</sup>Inbal Lavi, <sup>2</sup>Ron Litman,<br>
                     <sup>2</sup>Shahar Tsiper, <sup>2</sup>Royee Tichauer, <sup>2</sup>Srikar Appalaraju, <sup>2</sup>Shai Mazor, <sup>2</sup>R. Manmatha</p>
-                    <p class="institute-text"><sup>1</sup>Reichman University, <sup>2</sup>Amazon AWS AI Labs</p>
+                    <p class="institute-text"><sup>1</sup>Reichman University &nbsp;<sup>2</sup>Amazon AWS AI Labs</p>
     
                     <div class="button-container">
                         <a href="https://arxiv.org/abs/2407.12594" target="_blank">
@@ -42,19 +58,12 @@
     </div>
 
     <div class="container">
-        <section class="section overview">
-            <h2>Overview</h2>
-            <p>VisFocus is an OCR-free method for dense document understanding that aims to better utilize the vision encoder's capacity by directly coupling it with language prompts. This is achieved using a combination of architectural enhancements and a novel pre-training task.</p>
-            <figure>
-                <img src="imgs/teaser.png" alt="Overview figure">
-                <figcaption>Method Overview.</figcaption>
-            </figure>
-                    
-        </section>
-
         <section class="section abstract">
-            <h2>Abstract</h2>
-            <p>In recent years, notable advancements have been made in the domain of visual document understanding,
+            <h2>
+                <button class="collapse-button" onclick="toggleCollapse('method-content-abs')">▼</button>
+                Abstract
+            </h2>
+            <p id="method-content-abs" class="collapsible-content">In recent years, notable advancements have been made in the domain of visual document understanding,
                 with the prevailing architecture comprising a cascade of vision and language models.
                 The text component can either be extracted explicitly with the use of external OCR models in OCR-based approaches,
                 or alternatively, the vision model can be endowed with reading capabilities in OCR-free approaches. Typically,
@@ -68,9 +77,37 @@
                 this prompt-guided visual encoding approach significantly improves performance, achieving state-of-the-art results on various benchmarks.</p>
         </section>
 
+        <section class="section video">
+            <h2>
+                <button class="collapse-button" onclick="toggleCollapse('overview-content-vid')">▼</button>
+                Video
+            </h2>
+            <div id="overview-content-vid" class="video-container collapsible-content">
+                <iframe src="https://www.youtube.com/embed/9h8_hlhehmE" frameborder="0" allowfullscreen style="width: 50%; height: 50vh; margin-bottom: 20px;"></iframe>
+            </div>
+        </section>
+
+        <section class="section overview">
+            <h2>
+                <button class="collapse-button" onclick="toggleCollapse('overview-content')">▲</button>
+                Overview 
+            </h2>
+            <div id="overview-content" class="collapsible-content visible">
+                <p>VisFocus is an OCR-free method for dense document understanding that aims to better utilize the vision encoder's capacity by directly coupling it with language prompts. This is achieved using a combination of architectural enhancements and a novel pre-training task.</p>
+                <figure>
+                    <img src="imgs/teaser.png" alt="Overview figure">
+                    <figcaption>Method Overview.</figcaption>
+                </figure>
+            </div>
+        </section>
+        
         <section class="section method">
-            <h2>Method</h2>
-            <p>VisFucos proposes two main contribustions:</p>
+            <h2>
+                <button class="collapse-button" onclick="toggleCollapse('overview-content-method')">▲</button>
+                Method
+            </h2>
+            <div id="overview-content-method" class="collapsible-content collapsible-content visible">
+            <p>VisFocus proposes two main contribustions:</p>
             <div class="method-container">
                 <div class="method-column">
                     <h3>Localized Masked Language Modeling (LMPM)</h3>
@@ -88,7 +125,7 @@
                     </p>
                     <figure>
                         <img src="imgs/lmpm.png" alt="LMPM">
-                        <figcaption>Figure 1: Overview of the VisFocus method.</figcaption>
+                        <!-- <figcaption>Figure 1: Overview of the VisFocus method.</figcaption> -->
                     </figure>
 
                 </div>
@@ -101,39 +138,44 @@
                     </p>
                     <figure>
                         <img src="imgs/vilma.png" alt="ViLMA">
-                        <figcaption>Figure 1: Overview of the VisFocus method.</figcaption>
+                        <!-- <figcaption>Figure 1: Overview of the VisFocus method.</figcaption> -->
                     </figure>
                 </div>
             </div>
         </section>
         
         <section class="section results">
-            <h2>Results</h2>
-            <p>Comparison with previous OCR-Free methods on VQA benchmarks.</p>
-            <figure>
-                <img src="imgs/main_results.png" alt="main_results" style="max-width: 75%;">
-                <figcaption>VisFocus outperforms previous methods of comparable scale, even when trained on substantially less pre-training data. We report ANLS on DocVQA and InfoVQA, Relaxed Accuracy (RA) on ChartQA and Exact Match (EM) on OCR-VQA and AI2D. In fully-trained methods, we only state total number of parameters.</figcaption>
-            </figure>
+            <h2>
+                <button class="collapse-button" onclick="toggleCollapse('overview-content-res')">▲</button>
+                Results
+            </h2>
+            <div id="overview-content-res" class="collapsible-content visible">
+                <p>Comparison with previous OCR-Free methods on VQA benchmarks.</p>
+                <figure>
+                    <img src="imgs/main_results.png" alt="main_results" style="max-width: 75%;">
+                    <figcaption>VisFocus outperforms previous methods of comparable scale, even when trained on substantially less pre-training data. We report ANLS on DocVQA and InfoVQA, Relaxed Accuracy (RA) on ChartQA and Exact Match (EM) on OCR-VQA and AI2D. In fully-trained methods, we only state total number of parameters.</figcaption>
+                </figure>
+            </div>
         </section>
 
         <section class="section ablations">
-            <h2>Results</h2>
-            <p>We perform an extesive ablation study on each of VisFocus' components. More ablation can be fround in the paper.</p>
-            <figure>
-                <img src="imgs/abl_table.png" alt="ablation_table" style="max-width: 75%;">
-                <figcaption>Breaking down the contributions of VisFocus’ main components.</figcaption>
-            </figure>
-            <br>
-            <figure>
-                <img src="imgs/abl_maps.png" alt="ablation_lmpm" style="max-width: 75%;">
-                <figcaption>Attention maps of the last ViLMA layer, with and without LMPM.</figcaption>
-            </figure>
-            <br>
-        </section>
-
-        <section class="section video">
-            <h2>Video</h2>
-            <iframe src="https://www.youtube.com/embed/yourvideoid" frameborder="0" allowfullscreen></iframe>
+            <h2>
+                <button class="collapse-button" onclick="toggleCollapse('overview-content-emp')">▲</button>
+                Empirical Analysis
+            </h2>
+            <div id="overview-content-emp" class="collapsible-content visible">
+                <p>We perform an extesive ablation study on each of VisFocus' components. More ablation can be fround in the paper.</p>
+                <figure>
+                    <img src="imgs/abl_table.png" alt="ablation_table" style="max-width: 75%;">
+                    <figcaption>Breaking down the contributions of VisFocus’ main components.</figcaption>
+                </figure>
+                <br>
+                <figure>
+                    <img src="imgs/abl_maps.png" alt="ablation_lmpm" style="max-width: 75%;">
+                    <figcaption>Attention maps of the last ViLMA layer, with and without LMPM.</figcaption>
+                </figure>
+                <br>
+            </div>
         </section>
     </div>
 
