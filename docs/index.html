@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-    
 <script>
     function toggleCollapse(contentId) {
         const content = document.getElementById(contentId);
@@ -8,7 +7,7 @@
     
         if (content.style.display === "none" || content.style.display === "") {
             content.style.display = "block";
-            button.textContent = "▲"; // Change button to up arrow
+            button.textContent = "▶"; // Change button to up arrow
         } else {
             content.style.display = "none";
             button.textContent = "▼"; // Change button to down arrow
@@ -89,7 +88,7 @@
 
         <section class="section overview">
             <h2>
-                <button class="collapse-button" onclick="toggleCollapse('overview-content')">▲</button>
+                <button class="collapse-button" onclick="toggleCollapse('overview-content')">▶</button>
                 Overview 
             </h2>
             <div id="overview-content" class="collapsible-content visible">
@@ -103,7 +102,7 @@
         
         <section class="section method">
             <h2>
-                <button class="collapse-button" onclick="toggleCollapse('overview-content-method')">▲</button>
+                <button class="collapse-button" onclick="toggleCollapse('overview-content-method')">▶</button>
                 Method
             </h2>
             <div id="overview-content-method" class="collapsible-content collapsible-content visible">
@@ -146,7 +145,7 @@
         
         <section class="section results">
             <h2>
-                <button class="collapse-button" onclick="toggleCollapse('overview-content-res')">▲</button>
+                <button class="collapse-button" onclick="toggleCollapse('overview-content-res')">▶</button>
                 Results
             </h2>
             <div id="overview-content-res" class="collapsible-content visible">
@@ -160,7 +159,7 @@
 
         <section class="section ablations">
             <h2>
-                <button class="collapse-button" onclick="toggleCollapse('overview-content-emp')">▲</button>
+                <button class="collapse-button" onclick="toggleCollapse('overview-content-emp')">▶</button>
                 Empirical Analysis
             </h2>
             <div id="overview-content-emp" class="collapsible-content visible">
