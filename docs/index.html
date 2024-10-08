@@ -13,6 +13,17 @@
             button.textContent = "▶"; // Change button to down arrow
         }
     }
+    function copyCitation() {
+        const citation = document.getElementById('citation').innerText;
+        navigator.clipboard.writeText(citation).then(() => {
+            const status = document.getElementById('copy-status');
+            status.textContent = 'Copied';
+            setTimeout(() => status.textContent = '', 2000);  // Reset message after 2 seconds
+        }).catch(err => {
+            console.error('Failed to copy citation', err);
+        });
+    }
+
     </script>
 
 <head>
@@ -27,7 +38,7 @@
 
     <div class="header">
         <div class="header-content">
-            <img src="imgs/logos/runi_2.png" alt="Reichman University" class="logo">
+            <img src="imgs/logos/aws_black.png" alt="Amazon AWS AI Labs" class="logo">
             <div> 
                 <h1>VisFocus:<br>
                     Prompt-Guided Vision Encoders for OCR-Free Dense Document Understanding
@@ -44,7 +55,7 @@
                         <a href="https://arxiv.org/pdf/2407.12594" download>
                             <img src="imgs/buttons/paper.png" alt="PDF" class="button-image">
                         </a>
-                        <a href="" target="https://github.com/amazon-science/visfocus">
+                        <a href="https://github.com/amazon-science/visfocus" target="_blank">
                             <img src="imgs/buttons/code.png" alt="Code" class="button-image">
                         </a>
                         <a href="https://huggingface.co/papers/2407.12594" target="_blank">
@@ -52,8 +63,8 @@
                         </a>
                     </div>
                 </div>
-            <img src="imgs/logos/aws_black.png" alt="Amazon AWS AI Labs" class="logo">
-        </div>
+                <img src="imgs/logos/runi_2.png" alt="Reichman University" class="logo">
+            </div>
     </div>
 
     <div class="container">
@@ -176,10 +187,34 @@
                 <br>
             </div>
         </section>
+        <section class="section">
+            <h2>
+                Cite Us
+            </h2>
+            <div id="overview-content-emp" class="collapsible-content visible">
+                <p>If you find our word useful for your research, please cite us!</p>
+                <div class="citeus">
+                    <button class="copy-btn" onclick="copyCitation()">Copy</button>
+                    <br>
+                    <span id="copy-status"></span>
+                    <pre id="citation">
+@misc{abramovich2024visfocus,
+    title={VisFocus: Prompt-Guided Vision Encoders for OCR-Free Dense Document Understanding},
+    author={Ofir Abramovich and Niv Nayman and Sharon Fogel and Inbal Lavi and Ron Litman and Shahar Tsiper
+            and Royee Tichauer and Srikar Appalaraju and Shai Mazor and R. Manmatha},
+    year={2024},
+    eprint={2407.12594},
+    archivePrefix={arXiv},
+    primaryClass={cs.CV}
+}
+                    </pre>
+                </div>
+            </div>
+        </section>
     </div>
 
     <footer>
-        <p>&copy; 2024 VisFocus | Contact us at <a href="mailto:yourname@example.com">yourname@example.com</a></p>
+        <p>&copy; 2024 VisFocus | Email: <a href="mailto:ofir1080@gmail.com">ofir1080@gmail.com</a></p>
     </footer>
 
 </body>

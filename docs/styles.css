@@ -199,3 +199,47 @@ figure figcaption {
 .collapsible-content.visible + .collapse-button::after {
     content: "▲"; /* Up arrow */
 }
+
+.citeus {
+    background-color: #f4f4f9;
+    border: 1px solid #ddd;
+    /* padding-top: 10px; */
+    padding-left: 20px;
+    /* padding-bottom: 0%; */
+    border-radius: 8px;
+    /* margin-top: 20px; */
+    font-family: 'Arial', sans-serif;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    /* max-width: 600px; */
+    position: relative
+}
+
+.copy-btn {
+    background-color: #f4f4f9;
+    color: black;
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 10px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px; /* Optional margin to give space from edges */
+
+}
+
+.copy-btn:hover {
+    background-color: #c2c2c3;
+}
+
+#copy-status {
+    /* margin-left: 10px; */
+    padding: 5px 10px;
+    font-size: 1em;
+    color: rgb(102, 105, 102);
+    position: absolute;
+    top: 40px;
+    right: 0;
+}
